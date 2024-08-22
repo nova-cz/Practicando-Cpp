@@ -1,46 +1,54 @@
 #include <iostream>
 using namespace std;
 
-#define MAX 5  // Tamaño máximo de la lista
+#define MAX 10  // Tamaño máximo de la lista
 
+// Clase que representa una lista con tamaño fijo
 class Lista {
 private:
-    int arreglo[MAX];
-    int* puntero;
+    int arreglo[MAX];  // Arreglo para almacenar los elementos de la lista
+    int* puntero;      // Puntero para rastrear la posición actual en la lista
+
 public:
+    // Constructor que inicializa el puntero y el arreglo
     Lista() {
-        puntero = new int[MAX];
+        puntero = new int[MAX];  // Asigna memoria para el puntero
         for (int i = 0; i < MAX; i++) {
-            arreglo[i] = -1;  // Inicializa el arreglo con -1
+            arreglo[i] = -1;  // Inicializa el arreglo con -1 para indicar posiciones vacías
         }
-        *puntero = -1;  // Puntero inicializado a -1
+        *puntero = -1;  // Inicializa el puntero a -1 para indicar que la lista está vacía
     }
 
+    // Destructor que libera la memoria asignada para el puntero
     ~Lista() {
         delete[] puntero;
     }
 
+    // Verifica si la lista está vacía
     bool estaVacia() {
-        return (*puntero == -1);
+        return (*puntero == -1);  // La lista está vacía si el puntero es -1
     }
 
+    // Verifica si la lista está llena
     bool estaLlena() {
-        return (*puntero >= MAX - 1);
+        return (*puntero >= MAX - 1);  // La lista está llena si el puntero alcanza el tamaño máximo - 1
     }
 
+    // Inserta un elemento al inicio de la lista
     void insertarAlInicio(int valor) {
         if (estaLlena()) {
             cout << "La lista está llena. No se puede insertar al inicio." << endl;
             return;
         }
-        // Mueve todos los elementos una posición a la derecha
+        // Corrimiento a la derecha de los elementos
         for (int i = *puntero; i >= 0; i--) {
             arreglo[i + 1] = arreglo[i];
         }
         arreglo[0] = valor;  // Inserta el nuevo valor al inicio
-        (*puntero)++;
+        (*puntero)++;  // Incrementa el puntero
     }
 
+    // Inserta un elemento al final de la lista
     void insertarAlFinal(int valor) {
         if (estaLlena()) {
             cout << "La lista está llena. No se puede insertar al final." << endl;
@@ -48,9 +56,10 @@ public:
         }
         // Inserta el nuevo valor en la siguiente posición disponible
         arreglo[*puntero + 1] = valor;
-        (*puntero)++;
+        (*puntero)++;  // Incrementa el puntero, para indicar que hay un nuevo elemento
     }
 
+    // Suprime el elemento al inicio de la lista
     void suprimirAlInicio() {
         if (estaVacia()) {
             cout << "La lista está vacía. No se puede suprimir al inicio." << endl;
@@ -61,34 +70,37 @@ public:
             arreglo[i] = arreglo[i + 1];
         }
         arreglo[*puntero] = -1;  // Elimina el último elemento
-        (*puntero)--;
+        (*puntero)--;  // Decrementa el puntero
     }
 
+    // Suprime el elemento al final de la lista
     void suprimirAlFinal() {
         if (estaVacia()) {
             cout << "La lista está vacía. No se puede suprimir al final." << endl;
             return;
         }
         arreglo[*puntero] = -1;  // Elimina el último elemento
-        (*puntero)--;
+        (*puntero)--;  // Decrementa el puntero
     }
 
+    // Elimina todos los elementos duplicados en la lista
     void eliminarDuplicados() {
         for (int i = 0; i < *puntero; i++) {
             for (int j = i + 1; j <= *puntero; j++) {
                 if (arreglo[i] == arreglo[j]) {
-                    // Mueve todos los elementos una posición a la izquierda
+                    // Mueve todos los elementos a la izquierda para eliminar el duplicado
                     for (int k = j; k < *puntero; k++) {
                         arreglo[k] = arreglo[k + 1];
                     }
                     arreglo[*puntero] = -1;  // Elimina el último elemento
-                    (*puntero)--;
+                    (*puntero)--;  // Decrementa el puntero
                     j--;  // Verifica la nueva posición
                 }
             }
         }
     }
 
+    // Recupera el elemento en la posición especificada
     void recuperarElemento(int posicion) {
         if (posicion >= 0 && posicion <= *puntero) {
             cout << "Elemento en la posición " << posicion << ": " << arreglo[posicion] << endl;
@@ -97,6 +109,7 @@ public:
         }
     }
 
+    // Recupera el primer elemento de la lista
     void recuperarPrimerElemento() {
         if (estaVacia()) {
             cout << "La lista está vacía." << endl;
@@ -105,6 +118,7 @@ public:
         }
     }
 
+    // Recupera el último elemento de la lista
     void recuperarUltimoElemento() {
         if (estaVacia()) {
             cout << "La lista está vacía." << endl;
@@ -113,6 +127,7 @@ public:
         }
     }
 
+    // Recupera el sucesor del elemento en la posición especificada
     void recuperarSucesor(int posicion) {
         if (posicion >= 0 && posicion < *puntero) {
             cout << "Sucesor del elemento en la posición " << posicion << ": " << arreglo[posicion + 1] << endl;
@@ -121,6 +136,7 @@ public:
         }
     }
 
+    // Recupera el predecesor del elemento en la posición especificada
     void recuperarPredecesor(int posicion) {
         if (posicion > 0 && posicion <= *puntero) {
             cout << "Predecesor del elemento en la posición " << posicion << ": " << arreglo[posicion - 1] << endl;
@@ -129,12 +145,13 @@ public:
         }
     }
 
+    // Muestra todos los elementos de la lista
     void mostrarLista() {
         if (estaVacia()) {
             cout << "La lista está vacía." << endl;
         } else {
             for (int i = 0; i <= *puntero; i++) {
-                cout << arreglo[i] << " ";
+                cout << "["<<arreglo[i] << "] ";
             }
             cout << endl;
         }
@@ -142,10 +159,11 @@ public:
 };
 
 int main() {
-    Lista lista;
+    Lista lista;  // Crea una instancia de la lista
     int opcion, valor, posicion;
 
     do {
+        // Menu
         cout << "\nMenú:\n";
         cout << "1. Verificar si la lista está vacía\n";
         cout << "2. Verificar si la lista está llena\n";
@@ -164,6 +182,7 @@ int main() {
         cout << "Ingrese su opción: ";
         cin >> opcion;
 
+        // Ejecuta la opción seleccionada
         switch (opcion) {
             case 1:
                 if (lista.estaVacia()) {
