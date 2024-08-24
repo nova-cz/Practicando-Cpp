@@ -1,7 +1,22 @@
 #include <iostream>
+
+/*
+    !Autores:
+    - Miguel Angel Cruz Reyes
+    - Isaac Aguilar Duran
+    - Karla Yaneth Cruz Sandoval
+
+    !Objetivo: 
+    Implementar una lista con tamaño fijo y realizar operaciones básicas sobre ella, con
+    la ayuda de un puntero para acceder a los datos de la lista.
+
+    !Conlusion:
+    Se logro implementar la estructura de datos lista y operaciones sobre ella.
+*/
+
 using namespace std;
 
-#define MAX 10  // Tamaño máximo de la lista
+#define MAX 5  // Tamaño máximo de la lista
 
 // Clase que representa una lista con tamaño fijo
 class Lista {
@@ -128,22 +143,41 @@ public:
     }
 
     // Recupera el sucesor del elemento en la posición especificada
-    void recuperarSucesor(int posicion) {
-        if (posicion >= 0 && posicion < *puntero) {
-            cout << "Sucesor del elemento en la posición " << posicion << ": " << arreglo[posicion + 1] << endl;
-        } else {
-            cout << "No hay sucesor disponible." << endl;
+    void recuperarSucesorPorNumero(int numero) {
+        bool encontrado = false;
+        for (int i = 0; i <= *puntero; i++) {
+            if (arreglo[i] == numero) {
+                encontrado = true;
+                if (i < *puntero - 1) {
+                    cout << "Sucesor del elemento " << numero << ": " << arreglo[i + 1] << endl;
+                } else {
+                    cout << "No hay sucesor disponible." << endl;
+                }
+                return;
+            }
+        }
+        if (!encontrado) {
+            cout << "No se encontró el elemento " << numero << " en el arreglo." << endl;
         }
     }
-
-    // Recupera el predecesor del elemento en la posición especificada
-    void recuperarPredecesor(int posicion) {
-        if (posicion > 0 && posicion <= *puntero) {
-            cout << "Predecesor del elemento en la posición " << posicion << ": " << arreglo[posicion - 1] << endl;
-        } else {
-            cout << "No hay predecesor disponible." << endl;
+    
+    void recuperarAntecesorPorNumero(int numero){
+        bool  encontrado = false;
+        for (int i = 0; i <= *puntero; i++){
+            if (arreglo[i] == numero){
+                encontrado  = true;
+                if(i > 0){
+                    cout << "Predecesor del elemento " << numero << ": " << arreglo[i - 1] << endl;
+                } else {
+                    cout << "No hay predecesor disponible." << endl;
+                }
+            }
         }
-    }
+        if (!encontrado) {
+            cout << "No se encontró el elemento " << numero << " en el arreglo." << endl;
+        }
+        
+    };
 
     // Muestra todos los elementos de la lista
     void mostrarLista() {
@@ -160,7 +194,7 @@ public:
 
 int main() {
     Lista lista;  // Crea una instancia de la lista
-    int opcion, valor, posicion;
+    int opcion, valor, posicion, numero;
 
     do {
         // Menu
@@ -176,7 +210,7 @@ int main() {
         cout << "9. Recuperar el valor del primer elemento\n";
         cout << "10. Recuperar el valor del último elemento\n";
         cout << "11. Recuperar sucesor\n";
-        cout << "12. Recuperar predecesor\n";
+        cout << "12. Recuperar antecesor\n";
         cout << "13. Mostrar lista\n";
         cout << "0. Salir\n";
         cout << "Ingrese su opción: ";
@@ -229,14 +263,14 @@ int main() {
                 lista.recuperarUltimoElemento();
                 break;
             case 11:
-                cout << "Ingrese posición del elemento para recuperar el sucesor: ";
-                cin >> posicion;
-                lista.recuperarSucesor(posicion);
+                cout << "Ingrese el número, para buscar su sucesor: ";
+                cin>>numero;
+                lista.recuperarSucesorPorNumero(numero);
                 break;
             case 12:
-                cout << "Ingrese posición del elemento para recuperar el predecesor: ";
-                cin >> posicion;
-                lista.recuperarPredecesor(posicion);
+                cout<< "Ingrese el número, para buscar su predecesor: ";
+                cin>>numero;
+                lista.recuperarAntecesorPorNumero(numero);
                 break;
             case 13:
                 lista.mostrarLista();
