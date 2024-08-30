@@ -1,137 +1,89 @@
-#include <iostream>
-#include <listaes.h>
+#include "listaes.h"
 
-using namespace std;
-
-struct NODO{
-    int dato;
-    NODO *siguiente;
-};
-
-class Cola
-{
-private:
-    NODO* frente;
-    NODO* final;
+class Cola : public Lista {
 
 public:
-    Cola(){
-        frente = nullptr;
-        final = nullptr;
+    void encolar(int valor) {
+        insertarAlFinal(valor);
     }
+
+    void desencolar() {
+        suprimirAlInicio();
+    }
+
+    void frente() {
+        recuperarPrimerElemento();
+    }
+
+    bool vacia() {
+        return estaVacia();
+    }
+
+    void mostrarCola() {
+        mostrarLista();
+    }
+
+    void menu(){
+        cout << "\n--- Menu de Cola ---\n";
+        cout << "1. (encolar)\n";
+        cout << "2. (desencolar)\n";
+        cout << "3. (frente)\n";
+        cout << "4. Mostrar todos los elementos de la Cola\n";
+        cout << "5. Verificar si la cola está vacía\n";
+        cout << "6. Salir\n";
+        cout << "Seleccione una opción: ";
+    }
+
 };
 
-bool estaVacia(){
-    return (frente == NULL);
-}
-
-void encolar(int valor){
-    NODO* nuevo = new NODO();
-    nuevo->dato = valor;
-    nuevo->siguiente = NULL;
-
-    if(estaVacia()){
-        frente = nuevo;
-        final = nuevo;
-    }else{
-        final->siguiente = nuevo;
-        final = nuevo;
-    }
-}
-
-void desencolar(){
-    if(estaVacia()){
-        cout << "La cola está vacía" << endl;
-    }else{
-        NODO* aux = frente;
-        frente = frente->siguiente;
-        delete aux;
-    }
-}
-
-void mostrarCola(){
-    if(estaVacia()){
-        cout << "La cola está vacía" << endl;
-    }else{
-        NODO* aux = frente;
-        while(aux != NULL){
-            cout << aux->dato << " ";
-            aux = aux->siguiente;
-        }
-        cout << endl;
-    }
-}
-
-void mostrarMenu() {
-    cout << "\n--- Menu de Cola ---\n";
-    cout << "1. (encolar)\n";
-    cout << "2. (desencolar)\n";
-    cout << "3. (Cola Vacia)\n";
-    cout << "4. (Cola llena)";
-    cout << "5. Mostrar todos los elementos de la Pila\n\n";
-    cout << "6. Salir\n";
-    cout << "Seleccione una opción: ";
-}
-
-
 int main(){
-    Cola cola;
+    Cola miCola;
     int opcion, valor;
 
-    
     do {
-        mostrarMenu();
+        miCola.menu();
         cin >> opcion;
 
         switch (opcion) {
             case 1:
                 cout << "Ingrese el valor a insertar: ";
                 cin >> valor;
-                cola.encolar(valor);
+                miCola.encolar(valor);
                 cout << "Elemento insertado." << endl;
                 break;
-
             case 2:
-                if (!miPila.vacia()) {
-                    miPila.pop();
+                if (!miCola.vacia()) {
+                    miCola.desencolar();
                     cout << "Elemento superior eliminado." << endl;
                 } else {
-                    cout << "La pila está vacía." << endl;
+                    cout << "La cola está vacía." << endl;
                 }
                 break;
-
             case 3:
-                if (!miPila.vacia()) {
-                    miPila.top();
+                if (!miCola.vacia()) {
+                    miCola.frente();
                 } else {
-                    cout << "La pila está vacía." << endl;
+                    cout << "La cola está vacía." << endl;
                 }
                 break;
 
             case 4:
-                cout << "Elementos en la pila: ";
-                miPila.mostrarPila();
+                miCola.mostrarCola();
                 break;
 
             case 5:
-                if (miPila.vacia()) {
-                    cout << "La pila está vacía." << endl;
+                if (miCola.vacia()) {
+                    cout << "La cola está vacía." << endl;
                 } else {
-                    cout << "La pila no está vacía." << endl;
+                    cout << "La cola no está vacía." << endl;
                 }
                 break;
 
             case 6:
                 cout << "Saliendo..." << endl;
-                break;
-
-            default:
-                cout << "Opción no válida. Intente de nuevo." << endl;
+                break;  
         }
     } while (opcion != 6);
-
     return 0;
 }
 
-
-}
