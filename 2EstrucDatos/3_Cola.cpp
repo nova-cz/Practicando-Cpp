@@ -48,8 +48,13 @@ int main(){
             case 1:
                 cout << "Ingrese el valor a insertar: ";
                 cin >> valor;
-                miCola.encolar(valor);
-                cout << "Elemento insertado." << endl;
+                
+                if (miCola.estaLlena()) {
+                    cout << "La cola está llena. No se puede insertar." << endl;
+                } else{
+                    miCola.encolar(valor);
+                    cout<< "Elemento insertado." << endl;
+                }
                 break;
             case 2:
                 if (!miCola.vacia()) {
