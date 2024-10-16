@@ -120,7 +120,7 @@ int main(){
             cout << "Saliendo del programa..." << endl;
             break;
         default:
-            cout << "Opcion no valida. Intente de nuevo." << endl;
+            cout << "Opcion no valida, intente de nuevo" << endl;
             break;
         }
     } while (op != 7);
