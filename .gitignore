@@ -1,3 +1,4 @@
 # Ignorar archivos ejecutables .exe
 *.exe
 .vscode/
+.DS_Store

@@ -1,5 +1,12 @@
 #include "Librerias/ListaEstatica.h"
 
+/*
+    Operaciones principales
+    - Encolar
+    - Desencolar
+    - Mostrar
+*/
+
 class Cola : public Lista {
 
 public:
