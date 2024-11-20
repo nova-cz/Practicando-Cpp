@@ -1,7 +1,8 @@
 #include <iostream>
+using namespace std;
 
 int main(){
-  using namespace std;
+
   int a = 10, b = 3;
   int suma = a + b; // 13
   int resta = a - b; // 7
@@ -15,5 +16,9 @@ int main(){
   cout << "Division: " << division << endl;
   cout << "Modulo: " << modulo << endl;
 
+
   return 0;
 }
+
+
+

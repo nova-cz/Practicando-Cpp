@@ -1,4 +1,6 @@
 #include <iostream>
+//iostream es la libreria de entrada y salida, osea q es la q nos permite imprimir y leer datos cout, cin 
+
 
 int main() {
     

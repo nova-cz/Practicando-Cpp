@@ -1,8 +1,11 @@
 #include <iostream>
 
+#define range(it, a, b) for (int it = a; it < b; it++)
+
+typedef long long int ll;
 int main() {
     // While loop
-    int i = 0;
+    ll i = 0;
     std::cout << "While loop:" << std::endl;
     while (i < 5) {
         std::cout << i << std::endl;
@@ -19,7 +22,7 @@ int main() {
 
     // For loop
     std::cout << "For loop:" << std::endl;
-    for (int k = 0; k < 5; k++) {
+    range(k, 0, 5) {
         std::cout << k << std::endl;
     }
 
